@@ -1,8 +1,10 @@
+/* eslint-disable linebreak-style */
 const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
 const userRouter = require('./users');
 const movieRouter = require('./movies');
 const auth = require('../middlewares/auth');
-const { validateUrl } = require("./utils/utils");
+const { validateUrl } = require('../utils/utils');
 
 const {
   createUser,
@@ -10,30 +12,29 @@ const {
 } = require('../controllers/users');
 
 router.post(
-  "/signin",
+  '/signin',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
       password: Joi.string().required(),
     }),
   }),
-  login
+  login,
 );
 router.post(
-  "/signup",
+  '/signup',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
       password: Joi.string().required(),
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
-      avatar: Joi.string().custom(validateUrl, "custom validation"),
+      avatar: Joi.string().custom(validateUrl, 'custom validation'),
     }),
   }),
-  createUser
+  createUser,
 );
 router.use(auth, userRouter);
 router.use(auth, movieRouter);
-
 
 module.exports = router;
