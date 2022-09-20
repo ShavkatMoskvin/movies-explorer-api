@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const { NOT_FOUND } = require('../utils/constants');
 
 class NotFoundError extends Error {

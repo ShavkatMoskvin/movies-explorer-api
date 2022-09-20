@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const Movie = require('../models/movie');
 
 const NotFoundError = require('../errors/NotFoundError');

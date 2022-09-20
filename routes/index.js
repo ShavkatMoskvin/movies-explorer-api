@@ -1,10 +1,10 @@
-/* eslint-disable linebreak-style */
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const userRouter = require('./users');
 const movieRouter = require('./movies');
 const auth = require('../middlewares/auth');
 const { validateUrl } = require('../utils/utils');
+const NotFoundError = require('../errors/NotFoundError');
 
 const {
   createUser,
@@ -36,5 +36,8 @@ router.post(
 );
 router.use(auth, userRouter);
 router.use(auth, movieRouter);
+router.all('*', () => {
+  throw new NotFoundError('Страница не найдена');
+});
 
 module.exports = router;

@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const { CONFLICT_ERROR } = require('../utils/constants');
 
 class ConflictError extends Error {

@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const validator = require('validator');
@@ -11,7 +10,6 @@ const userSchema = new mongoose.Schema(
       minlength: 2,
       maxlength: 30,
       required: true,
-      default: 'Жак-Ив Кусто',
     },
     email: {
       type: String,
@@ -32,7 +30,6 @@ const userSchema = new mongoose.Schema(
   { versionKey: false },
 );
 
-// eslint-disable-next-line func-names
 userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {

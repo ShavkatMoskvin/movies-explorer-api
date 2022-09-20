@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/user');
@@ -66,12 +65,12 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.updateUserInfo = (req, res, next) => {
-  const { name } = req.body;
+  const { name, email } = req.body;
   const userId = req.user._id;
   userModel
     .findByIdAndUpdate(
       userId,
-      { name },
+      { name, email },
       { new: true, runValidators: true },
     )
     .then((user) => res.send(user))
@@ -90,7 +89,6 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        // eslint-disable-next-line no-undef
         NODE_ENV === 'production' ? JWT_SECRET : 'secret',
         { expiresIn: '7d' },
       );

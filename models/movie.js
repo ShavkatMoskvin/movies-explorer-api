@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const mongoose = require('mongoose');
 const { LINK_REGEXP } = require('../utils/constants');
 
@@ -34,7 +33,6 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator(v) {
-          // eslint-disable-next-line no-undef
           return LINK_REGEXP.test(v);
         },
       },
@@ -44,7 +42,6 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator(v) {
-          // eslint-disable-next-line no-undef
           return LINK_REGEXP.test(v);
         },
       },
@@ -54,7 +51,6 @@ const movieSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator(v) {
-          // eslint-disable-next-line no-undef
           return LINK_REGEXP.test(v);
         },
       },
