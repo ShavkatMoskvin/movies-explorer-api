@@ -5,6 +5,7 @@ const app = express();
 const { PORT = 3002 } = process.env;
 const { errors } = require('celebrate');
 
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -27,15 +28,17 @@ app.use(
   }),
 );
 
+app.use(helmet());
+app.use(errorLogger);
 app.use(cookieParser());
 
 mongoose.connect('mongodb://127.0.0.1:27017/moviesdb', {
   useNewUrlParser: true,
 });
 
-app.use('/', router);
 app.use(requestLogger);
 app.use(rateLimiter);
+app.use('/', router);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -43,7 +46,6 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 

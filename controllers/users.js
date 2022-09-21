@@ -77,8 +77,11 @@ module.exports.updateUserInfo = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError' || err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные или неполные данные'));
+      } else if (err.name === 'MongoServerError') {
+        next(new ConflictError('Введенные данные уже используются'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
