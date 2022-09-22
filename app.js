@@ -29,7 +29,7 @@ app.use(
 );
 
 app.use(helmet());
-app.use(errorLogger);
+
 app.use(cookieParser());
 
 mongoose.connect('mongodb://127.0.0.1:27017/moviesdb', {
@@ -46,6 +46,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
